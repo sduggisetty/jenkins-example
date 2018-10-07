@@ -16,7 +16,7 @@ Ant Simple Sample File to test my CI process.
 
 	<property name="jarname"  value="${ant.project.name}"/>
 
-	<!-- set directoriess -->
+	<!--- set directoriess -->
 
 	<property name="src" location="src"/>
 
