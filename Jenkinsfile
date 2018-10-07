@@ -9,18 +9,20 @@ node('master') {
 
     
     stage('Build') {
-        withAnt(installation: 'mywindows_ant1.9.6', jdk: 'JAVA_HOME') {
+        withAnt(installation: 'ant1.9.6', jdk: 'mywindows_jdk1.8') {
             bat 'ant'
         }
+    }
     
-    
-   //input message: 'Do you want to clearn workspace?', ok: 'OK', submitter: 'subbu'
+   ///input message: 'Do you want to clearn workspace?', ok: 'OK', submitter: 'subbu'
 
-    /*stage('cleanWs') 
+    stage('cleanWs') {
         cleanWs()
-    }*/
+    }
     
     stage('Alrerts'){
             emailext body: '', subject: '', to: 'subbu@gmail.com'
     }
 }
+
+
