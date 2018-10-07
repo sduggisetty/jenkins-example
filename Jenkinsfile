@@ -15,7 +15,7 @@ node('master') {
     
     
    //input message: 'Do you want to clearn workspace?', ok: 'OK', submitter: 'subbu'
-    
+
     stage('cleanWs') 
         cleanWs()
     }
