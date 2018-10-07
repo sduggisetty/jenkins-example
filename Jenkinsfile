@@ -9,7 +9,7 @@ node('master') {
 
     
     stage('Build') {
-        withAnt(installation: 'mywindows_ant1.9.6', jdk: 'JAVA_HOME') {
+        withAnt(installation: 'ant1.9.6', jdk: 'mywindows_jdk1.8') {
             bat 'ant'
         }
     
@@ -24,3 +24,5 @@ node('master') {
             emailext body: '', subject: '', to: 'subbu@gmail.com'
     }
 }
+
+
