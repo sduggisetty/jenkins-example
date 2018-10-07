@@ -105,7 +105,7 @@ Ant Simple Sample File to test my CI process.
 
 <target name="dist" depends="clean, compile, test" description="generate the distribution" >
 
-<!-- Create the distribution directory -->
+<!-- Create the distribution directory klkk-->
 
 
 <!-- Put everything in ${build_dir} into the MyProject-${DSTAMP}.jar file -->
