@@ -1,0 +1,145 @@
+<project name="antsimple" default="dist" basedir=".">
+
+<description>
+
+Ant Simple Sample File to test my CI process.
+
+</description>
+
+<!-- set global properties for this build -->
+
+	<property name="ant.project.name" value="antsimple"/>
+
+	<property name="main_class_name" value="HW"/>
+	
+	<property name="build_dir" value="build"/>
+
+	<property name="jarname"  value="${ant.project.name}"/>
+
+	<!-- set directories -->
+
+	<property name="src" location="src"/>
+
+	<property name="test" location="test"/>
+
+	<!--  <property name="build" location="build"/> -->
+
+	<property name="dist"  location="dist"/>
+
+	<property name="lib"  location="lib"/>
+
+
+<path id="project.classpath" >
+
+	<!--pathelement location="${build_dir}" /-->
+
+	<pathelement location="${lib}/junit.jar" />
+
+</path>
+
+<target name="init">
+
+	<!-- Create the time stamp -->
+
+	<tstamp/>
+
+	<!-- Create directories if needed 
+
+	<mkdir dir="${src}"/>
+
+	<mkdir dir="${test}"/> -->
+
+	<mkdir dir="${build_dir}"/>
+
+	<mkdir dir="${dist}"/>
+
+</target>
+
+<target name="compile" depends="init" description="compile the source " >
+
+<!-- Compile the java code from ${src} into ${build_dir}asdfasdf -->
+
+	<javac includeantruntime="true" debug="true" srcdir="${src}" destdir="${build_dir}" classpathref="project.classpath"/>
+
+	<!-- Copy files from ${src} into ${build_dir} -->
+
+	<copy todir="${build_dir}">
+
+		<fileset dir="${src}">
+
+			<exclude name="**/*.java"/>
+
+		</fileset>
+
+	</copy>
+
+</target>
+
+<target name="compiletest" depends="compile" description="compile the tests " >
+
+	<javac includeantruntime="true" debug="true" srcdir="${test}" destdir="${build_dir}" classpathref="project.classpath" />
+	
+</target>
+
+<target name="test" depends="compiletest" description="run the tests " >
+
+	<junit printsummary="yes" fork="yes" haltonfailure="no">
+
+		<formatter type="plain"/>
+
+		<batchtest fork="true">
+
+		<fileset dir="${test}">
+
+		<include name="**/*Test*.java"/>
+
+		</fileset>
+
+		</batchtest>
+
+		<classpath refid="project.classpath" />
+
+	</junit>
+
+</target>
+
+<target name="dist" depends="clean, compile, test" description="generate the distribution" >
+
+<!-- Create the distribution directory -->
+
+
+<!-- Put everything in ${build_dir} into the MyProject-${DSTAMP}.jar file -->
+
+	<jar jarfile="${dist}/${jarname}-${DSTAMP}.jar" basedir="${build_dir}">
+
+	<manifest>
+
+		<attribute name="Main-Class" value="${main_class_name}"/>
+
+	</manifest>
+
+	</jar>
+
+	<copy file="${dist}/${jarname}-${DSTAMP}.jar" tofile="./${jarname}.jar" overwrite="true"/>
+
+</target>
+
+<target name="clean" description="clean up" >
+
+	<!-- Delete the ${build_dir} directory-->
+
+	<delete dir="${build_dir}"/>
+	<delete dir="${dist}"/>
+	<delete file="antsimple.jar"/>
+
+</target>
+
+<target name="mytarget" description="its for my testing" >
+
+	<!-- Delete the ${build_dir} directory-->
+
+	<echo>${build_dir}</echo>
+
+</target>
+
+</project>
